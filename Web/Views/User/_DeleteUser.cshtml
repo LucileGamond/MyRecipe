@@ -1,0 +1,14 @@
+﻿@model UserViewModel
+@using Web.Models
+
+    <form asp-action="DoDeleteUser" asp-route-id="@Model.Id" role="form">
+
+
+        <div class="modal-body form-horizontal">
+            Are you want to delete @Model.UserName?
+        </div>
+        <button class="btn btn-success" id="@Model.Id" type="submit">
+            Delete
+        </button>
+
+    </form>

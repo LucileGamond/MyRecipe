@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Web.Models.RecipeListVM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-controller="Recipe" asp-action="New"  class="btn add-btn">
+        <i class="fa fa-plus"></i>
+    </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PersCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrepDuration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CookingDuration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DifficultyLevel)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @Html.HiddenFor(modelItem => item.Id)
+                <td>
+                    @Html.DisplayFor(modelItem => item.PersCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrepDuration)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CookingDuration)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DifficultyLevel)
+                </td>
+                <td>
+                    <a asp-controller="Recipe" asp-action="Edit" asp-route-Id="@item.Id"  class="btn edit-btn">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                    <a asp-controller="Recipe" asp-action="Details" asp-route-Id="@item.Id"  class="btn details-btn">
+                        <i class="fa fa-search"></i>
+                    </a>
+
+                    <HyperLink asp-action="Delete" asp-controller="Recipe" method="Post" asp-route-Id="@item.Id" dataconfirm="Supp definitivement ?" class="btn delete-btn" faclass="fa fa-trash" >
+                    </HyperLink>
+                </td>
+            </tr>
+
+
+
+        }
+    </tbody>
+</table>
+
