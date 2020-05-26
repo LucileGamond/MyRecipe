@@ -44,6 +44,7 @@ namespace Repository
             {
                 throw new ArgumentNullException("entity");
             }
+            context.Update(entity);
             context.SaveChanges();
         }
 

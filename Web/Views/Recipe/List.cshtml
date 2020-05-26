@@ -60,13 +60,9 @@
                         <i class="fa fa-search"></i>
                     </a>
 
-                    <HyperLink asp-action="Delete" asp-controller="Recipe" method="Post" asp-route-Id="@item.Id" dataconfirm="Supp definitivement ?" class="btn delete-btn" faclass="fa fa-trash" >
-                    </HyperLink>
+                    <HyperLink asp-action="Delete" asp-controller="Recipe" method="Post" asp-route-Id="@item.Id" dataconfirm="Supp definitivement ?" class="btn delete-btn" faclass="fa fa-trash" />
                 </td>
             </tr>
-
-
-
         }
     </tbody>
 </table>

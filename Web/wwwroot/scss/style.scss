@@ -1,4 +1,4 @@
-@import 'theme_color';
+﻿@import 'theme_color';
 @import 'variables';
 @import 'fonts';
 @import 'mixin';
@@ -893,13 +893,13 @@ hyperlink{
     .owl-prev,
     .owl-next {
         position: absolute;
-        width: 85px;
+        width: 40px;
         height: 40px;
         top: 50%;
         margin-top: -20px;
         font-size: 12px;
-        font-weight: 600;
         color: $white-color;
+        font-weight:900;
         text-transform: uppercase;
         background-color: $hover-color;
         left: 0;
@@ -1528,6 +1528,28 @@ hyperlink{
     }
 }
 
+.post-title {
+            display: block;
+            font-size: 24px;
+            text-align:center;
+            font-weight: bolder;
+            @include trans-duration(500ms);
+            &:hover,
+            &:focus {
+                color: $hover-color;
+            }
+}
+
+.post-tag {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 15px;
+    background-color: $bg-gray;
+    color: $pri-color;
+    text-transform: uppercase;
+    @include trans-duration(500ms);
+}
+
 .single-widget-area {
     position: relative;
     z-index: 1;
@@ -1752,11 +1774,11 @@ hyperlink{
     position: relative;
     z-index: 1;
     background-color: $hover-color;
-    padding: 50px 20px;
+    padding: 20px 10px;
     margin-bottom: 30px;
     h5 {
         color: $white-color;
-        margin-bottom: 50px;
+        margin-bottom: 25px;
         font-size: 18px;
         padding-left: 30px;
     }
@@ -1768,7 +1790,7 @@ hyperlink{
             @include align-items(center);
             padding: 10px 30px;
             border-bottom: 2px solid #a3b65a;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 600;
             &:last-child {
                 border-bottom: none;
@@ -1785,48 +1807,41 @@ hyperlink{
     position: relative;
     z-index: 1;
     background-color: #ebf4f6;
-    padding: 50px 20px;
+    padding: 30px 5px;
+
     h5 {
         color: $heading-color;
-        margin-bottom: 50px;
+        margin-bottom: 25px;
         font-size: 18px;
         padding-left: 30px;
     }
+
     .custom-control {
-        padding-left: 2.5rem;
-        margin-bottom: 20px;
-        min-height: 35px;
+        min-height: 25px;
         position: relative;
         z-index: 1;
         border-bottom: 2px solid #d6e1e4;
-        padding-bottom: 20px;
+        padding: 5px 10px;
+
         .custom-control-label {
             position: relative;
             z-index: 1;
             margin-bottom: 0;
             padding-top: 3px;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 500;
             color: #8b8b8b;
-            padding-left: 10px;
+            padding-left: 15px;
+
             &::before {
-                width: 22px;
-                height: 22px;
-                border: 1px solid;
+                width: 6px;
+                height: 6px;
+                margin-left: 20px;
+                border: 5px solid;
                 border-color: #d6e1e4;
                 background-color: $white-color;
-                border-radius: 0;
-            }
-            &::after {
-                top: 5px;
-                left: -23px;
-                width: 20px;
-                height: 20px;
-            }
+                border-radius: 10px;
         }
-    }
-    .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
-        background-color: $bg-default;
     }
 }
 

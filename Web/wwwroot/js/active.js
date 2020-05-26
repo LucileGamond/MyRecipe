@@ -50,7 +50,7 @@
             margin: 30,
             loop: true,
             nav: true,
-            navText: ['Prev', 'Next'],
+            navText: ['<', '>'],
             dots: false,
             autoplay: true,
             center: true,

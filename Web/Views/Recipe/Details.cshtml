@@ -1,0 +1,172 @@
+﻿@model Web.Models.RecipeVM
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<section class="post-news-area section-padding-100-0 mb-50">
+    <div class="container">
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="row justify-content-center">
+            <div class="col-sm-12 col-lg-12 col-xl-12 post-title p-3">
+                @Html.DisplayFor(model => model.Title)
+            </div>
+
+            <div class="col-sm-12 text-center pb-5">
+                <a href="" class="post-tag">Tag 1 </a>
+                <a href="" class="post-tag">Tag 2 </a>
+                <a href="" class="post-tag">Tag 3 </a>
+            </div>
+
+
+            <!-- Post Details Content Area -->
+            <div class="col-sm-12 col-lg-4 col-xl-4">
+                <!-- Info -->
+                <div class="recipe-info">
+                    <h5>Infos</h5>
+                    <dl class="row">
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(model => model.PersCount)
+                        </dt>
+                        <dd class="col-sm-6">
+                            @Html.DisplayFor(model => model.PersCount)
+                        </dd>
+
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(model => model.PrepDuration)
+                        </dt>
+                        <dd class="col-sm-6">
+                            @Html.DisplayFor(model => model.PrepDuration)
+                        </dd>
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(model => model.CookingDuration)
+                        </dt>
+                        <dd class="col-sm-6">
+                            @Html.DisplayFor(model => model.CookingDuration)
+                        </dd>
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(model => model.CoolingDuration)
+                        </dt>
+                        <dd class="col-sm-6">
+                            @Html.DisplayFor(model => model.CoolingDuration)
+                        </dd>
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(model => model.WaitingDuration)
+                        </dt>
+                        <dd class="col-sm-6">
+                            @Html.DisplayFor(model => model.WaitingDuration)
+                        </dd>
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(model => model.DifficultyLevel)
+                        </dt>
+                        <dd class="col-sm-6">
+                            @Html.DisplayFor(model => model.DifficultyLevel)
+                        </dd>
+                    </dl>
+                </div>
+
+                <!-- Ingredients -->
+                <div class="ingredients">
+                    <h5>Ingredients</h5>
+
+                    <div class="custom-control">
+                        <label class="custom-control-label" for="customCheck1"><span class="quantity">4 Tbsp (57 gr)</span> butter</label>
+                    </div>
+
+                    <div class="custom-control">
+                        <label class="custom-control-label" for="customCheck2"><span class="quantity">2</span>eggs</label>
+                    </div>
+
+                    <div class="custom-control">
+                        <label class="custom-control-label" for="customCheck3"><span class="quantity">2</span> yogurt containers granulated sugar</label>
+                    </div>
+
+                    <div class="custom-control">
+                        <label class="custom-control-label" for="customCheck4"><span class="quantity">1</span> vanilla or plain yogurt, 170g container</label>
+                    </div>
+
+                    <div class="custom-control">
+                        <label class="custom-control-label" for="customCheck5"><span class="quantity">2</span> yogurt containers unbleached white flour</label>
+                    </div>
+
+                    <div class="custom-control">
+                        <label class="custom-control-label" for="customCheck6"><span class="quantity">2</span> yogurt containers milk</label>
+                    </div>
+
+                    <div class="custom-control">
+                        <label class="custom-control-label" for="customCheck7"><span class="quantity">1/4</span> tsp cinnamon</label>
+                    </div>
+
+                    <div class="custom-control custom-checkbox">
+                        <label class="custom-control-label" for="customCheck8"><span class="quantity">1</span> cup fresh blueberries </label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-sm-12 col-lg-8 col-xl-8">
+                <div class="post-details-content mb-100">
+                    <!-- ##### Hero Area Start ##### -->
+                    <div class="hero-area pb-5">
+                        <!-- Hero Post Slides -->
+                        <div class="hero-post-slides owl-carousel">
+                            <!-- Single Slide -->
+                            <div class="single-slide">
+                                <!-- Blog Thumbnail -->
+                                <div class="blog-thumbnail">
+                                    <a href="#"><img src="~/img/bg-img/1.jpg" alt=""></a>
+                                </div>
+                            </div>
+
+                            <!-- Single Slide -->
+                            <div class="single-slide">
+                                <!-- Blog Thumbnail -->
+                                <div class="blog-thumbnail">
+                                    <a href="#"><img src="~/img/bg-img/2.jpg" alt=""></a>
+                                </div>
+                            </div>
+
+                            <!-- Single Slide -->
+                            <div class="single-slide">
+                                <!-- Blog Thumbnail -->
+                                <div class="blog-thumbnail">
+                                    <a href="#"><img src="~/img/bg-img/3.jpg" alt=""></a>
+                                </div>
+                            </div>
+
+                            <!-- Single Slide -->
+                            <div class="single-slide">
+                                <!-- Blog Thumbnail -->
+                                <div class="blog-thumbnail">
+                                    <a href="#"><img src="~/img/bg-img/3.jpg" alt=""></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ##### Hero Area End ##### -->
+
+                    <div class="blog-content">
+                        <h5 class="mb-30">Step 1</h5>
+                        <p class="mb-30">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique justo id elit bibendum pharetra non vitae lectus. Mauris libero felis, dapibus a ultrices sed, commodo vitae odio. Sed auctor tellus quis arcu tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac tincidunt nunc. Cras sed mollis erat. Quisque risus lorem, mattis nec nisl a, efficitur faucibus ligula. Nulla facilisi. Integer sodales, metus nec finibus lobortis, ex justo pharetra quam, vel vehicula urna turpis ut risus. Sed dignissim erat sapien, non malesuada justo cursus nec. Nunc porta pulvinar varius.</p>
+
+                        <h5 class="mb-30">Step 2</h5>
+                        <p class="mb-30">Suspendisse nisl leo, gravida quis tortor at, ornare commodo neque. Donec tortor turpis, pharetra et pulvinar vitae, ullamcorper et mi. Sed eu magna aliquam, suscipit massa sit amet, mattis augue. Nam ut tortor ut ligula molestie feugiat vitae et nulla. Sed porta erat vitae leo pellentesque malesuada. In sollicitudin, massa euismod aliquet volutpat, enim metus varius dui, vestibulum efficitur ante velit non nisi. Cras varius bibendum sapien, id tincidunt velit placerat id. Nunc vitae facilisis nunc. Suspendisse ut felis sagittis mauris faucibus tincidunt vitae id tortor. Nullam tincidunt finibus turpis, a accumsan mauris laoreet cursus. Phasellus pharetra odio sapien, id suscipit nisi lobortis ut.</p>
+
+                        <h5 class="mb-30">Step 3</h5>
+                        <p class="mb-30">Duis posuere odio vitae neque egestas luctus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer risus neque, sollicitudin pharetra pulvinar a, imperdiet porttitor nunc. Aenean pretium, libero eu pulvinar commodo, lorem enim bibendum est, vel suscipit est mi non tortor. Vestibulum sit amet pretium tortor. Donec posuere, dui quis dictum hendrerit, odio mauris aliquam lacus, eu egestas libero risus vel nisi. Proin condimentum varius lectus sed dapibus.</p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
+
+
+<div>
+    <a asp-action="List">Retour à la liste des recette</a>
+</div>

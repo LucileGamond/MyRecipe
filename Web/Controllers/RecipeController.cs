@@ -5,48 +5,41 @@ using System.Threading.Tasks;
 using Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Service;
+using Web.Mappers;
 using Web.Models;
 
 namespace Web.Controllers
 {
     public class RecipeController : Controller
     {
+
+
         private  IRecipeService _recipeService;
+        private RecipeMapper _recipeMapper;
 
         public RecipeController(IRecipeService recipeService)
         {
             this._recipeService = recipeService;
+            this._recipeMapper = new RecipeMapper();
         }
 
         // GET: Receipe
         public ActionResult List()
-        {
+        {          
+            List<RecipeEntity> recipes = _recipeService.GetAll().ToList();
             List<RecipeListVM> model = new List<RecipeListVM>();
-            var recipes = _recipeService.GetAll().ToList();
-            recipes.ForEach(r =>
-            {
-                RecipeEntity userProfile = _recipeService.Get(r.Id);
-                RecipeListVM recipe = new RecipeListVM
-                {
-                    Id = r.Id,
-                    Title = r.Title,
-                    DifficultyLevel = r.DifficultyLevel,
-                    CookingDuration = r.CookingDuration,
-                    PersCount = r.PersCount,
-                    PrepDuration = r.PrepDuration
-                };
-                model.Add(recipe);
-            });
-
-
+            model = _recipeMapper.ToListViewModel(recipes);
             return View(model);
         }
 
         // GET: Receipe/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(Guid Id)
         {
-            return View();
+            RecipeEntity recipe = _recipeService.Get(Id);
+            RecipeVM model = _recipeMapper.ToViewModel(recipe);
+            return View(model);
         }
 
         // GET: Receipe/New
@@ -59,24 +52,17 @@ namespace Web.Controllers
         // POST: Receipe/New
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult New(RecipeVM model)
+        public ActionResult New(RecipeVM recipeVM)
         {
             try
             {
-                RecipeEntity recipeEntity = new RecipeEntity
-                {
-                    PersCount = model.PersCount,
-                    Title = model.Title,
-                    PrepDuration = model.PrepDuration,
-                    CookingDuration= model.CookingDuration,
-                    DifficultyLevel = model.DifficultyLevel
-                };
+                RecipeEntity recipeEntity = _recipeMapper.ToModel(recipeVM);
                 _recipeService.Insert(recipeEntity);
                 if (recipeEntity.Id != Guid.Empty)
                 {
                     return RedirectToAction("List");
                 }
-                return View(model);
+                return View(recipeVM);
             }
             catch
             {
@@ -85,21 +71,23 @@ namespace Web.Controllers
         }
 
         // GET: Recipe/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid Id)
         {
-            return View();
+            RecipeEntity recipe = _recipeService.Get(Id);
+            RecipeVM model = _recipeMapper.ToViewModel(recipe);
+            return View(model);
         }
 
         // POST: Recipe/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(RecipeVM recipeVM)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
+                RecipeEntity recipe = _recipeMapper.ToModel(recipeVM);
+                _recipeService.Update(recipe);
+                return RedirectToAction("List");
             }
             catch
             {
