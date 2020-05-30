@@ -34,9 +34,11 @@ namespace Web
         {
             services.AddMvc();
             services.AddDbContext<Repository.AppContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            
+            // Repository layer
             services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<IUserProfileService, UserProfileService>();
+
+            // Service layer
             services.AddTransient<IRecipeService, RecipeService>();
         }
 

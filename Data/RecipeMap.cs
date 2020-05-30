@@ -4,7 +4,7 @@ namespace Data
 {
     public class RecipeMap
     {
-        public RecipeMap(EntityTypeBuilder<RecipeEntity> entityBuilder)
+        public RecipeMap(EntityTypeBuilder<Recipe> entityBuilder)
         {
             entityBuilder.HasKey(t => t.Id);          
             entityBuilder.Property(t => t.Title).IsRequired();
@@ -15,8 +15,8 @@ namespace Data
             entityBuilder.Property(t => t.WaitingDuration);
             entityBuilder.Property(t => t.RecommendedAssociation);
             entityBuilder.Property(t => t.DifficultyLevel);
-
-
+            entityBuilder.HasMany(t => t.Steps)
+                         .WithOne(r => r.Recipe);
         }
     }
 }

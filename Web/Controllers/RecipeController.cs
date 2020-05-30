@@ -17,6 +17,7 @@ namespace Web.Controllers
 
 
         private  IRecipeService _recipeService;
+     
         private RecipeMapper _recipeMapper;
 
         public RecipeController(IRecipeService recipeService)
@@ -26,18 +27,18 @@ namespace Web.Controllers
         }
 
         // GET: Receipe
-        public ActionResult List()
+        public async Task<IActionResult> List()
         {          
-            List<RecipeEntity> recipes = _recipeService.GetAll().ToList();
-            List<RecipeListVM> model = new List<RecipeListVM>();
+            IList<Recipe> recipes = await _recipeService.GetAll();
+            IList<RecipeListVM> model = new List<RecipeListVM>();
             model = _recipeMapper.ToListViewModel(recipes);
             return View(model);
         }
 
         // GET: Receipe/Details/5
-        public ActionResult Details(Guid Id)
+        public async Task<IActionResult> Details(Guid Id)
         {
-            RecipeEntity recipe = _recipeService.Get(Id);
+            Recipe recipe = await _recipeService.Get(Id);
             RecipeVM model = _recipeMapper.ToViewModel(recipe);
             return View(model);
         }
@@ -52,12 +53,12 @@ namespace Web.Controllers
         // POST: Receipe/New
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult New(RecipeVM recipeVM)
+        public async Task<IActionResult> New(RecipeVM recipeVM)
         {
             try
             {
-                RecipeEntity recipeEntity = _recipeMapper.ToModel(recipeVM);
-                _recipeService.Insert(recipeEntity);
+                Recipe recipeEntity = _recipeMapper.ToModel(recipeVM);
+                await _recipeService.Add(recipeEntity);
                 if (recipeEntity.Id != Guid.Empty)
                 {
                     return RedirectToAction("List");
@@ -71,9 +72,9 @@ namespace Web.Controllers
         }
 
         // GET: Recipe/Edit/5
-        public ActionResult Edit(Guid Id)
+        public async Task<IActionResult> Edit(Guid Id)
         {
-            RecipeEntity recipe = _recipeService.Get(Id);
+            Recipe recipe = await _recipeService.Get(Id);
             RecipeVM model = _recipeMapper.ToViewModel(recipe);
             return View(model);
         }
@@ -81,11 +82,11 @@ namespace Web.Controllers
         // POST: Recipe/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(RecipeVM recipeVM)
+        public IActionResult Edit(RecipeVM recipeVM)
         {
             try
             {
-                RecipeEntity recipe = _recipeMapper.ToModel(recipeVM);
+                Recipe recipe = _recipeMapper.ToModel(recipeVM);
                 _recipeService.Update(recipe);
                 return RedirectToAction("List");
             }
@@ -98,11 +99,11 @@ namespace Web.Controllers
 
         // POST: Recipe/Delete/5
         [HttpPost]
-        public ActionResult Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             try
             {
-                _recipeService.Delete(id);
+                await _recipeService.Delete(id);
                 return RedirectToAction("List");
             }
             catch

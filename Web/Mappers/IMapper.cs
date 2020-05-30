@@ -14,11 +14,11 @@ namespace Web.Mappers
     {
         public T ToModel(V ViewModel);
         public T ToModel(U ViewModel);
-        public List<T> ToModel(List<V> ViewModel);
+        public IList<T> ToModel(IList<V> ViewModel);
         public U ToViewModel(T Model);
-        public List<U> ToViewModel(List<T> Model);
+        public IList<U> ToViewModel(IList<T> Model);
         public V ToListViewModel(T Model);
-        public List<V> ToListViewModel(List<T> Model);
+        public IList<V> ToListViewModel(IList<T> Model);
     }
 
  

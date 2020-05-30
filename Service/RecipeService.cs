@@ -2,44 +2,56 @@
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
 
 namespace Service
 {
     public class RecipeService : IRecipeService
     {
 
-        private IRepository<RecipeEntity> _recipeRepository;
-
-        public  RecipeService(IRepository<RecipeEntity> receipeRepository)
+        private IRepository<Recipe> _recipeRepository;
+        private IRepository<Step> _stepRepository;
+        public  RecipeService(IRepository<Recipe> recipeRepository, IRepository<Step> stepRepository)
         {
-            this._recipeRepository = receipeRepository;
+            this._recipeRepository = recipeRepository;
+            this._stepRepository = stepRepository;
         }
 
-
-        public void Delete(Guid id)
+        public async Task Delete(Guid id)
         {
-            RecipeEntity recipe =  _recipeRepository.Get(id);
-            _recipeRepository.Delete(recipe);
+            //Delete steps related to the current recipe
+            IList<Step> steps = await _stepRepository.GetAsync(x => x.Recipe.Id == id);
+            await _stepRepository.DeleteAsync(steps);
+
+            //Delete recipe
+            Recipe recipe = await _recipeRepository.GetByIdAsync(id);
+            if (recipe == null)
+                throw new ApplicationException($"Recipe could not be loaded.");
+            await _recipeRepository.DeleteAsync(recipe);
         }
 
-        public RecipeEntity Get(Guid id)
+        public async Task<Recipe> Get(Guid id)
         {
-            return _recipeRepository.Get(id);
+            Recipe recipe = await _recipeRepository.GetByIdAsync(id);
+            recipe.Steps = await _stepRepository.GetAsync(x => x.Recipe.Id == id, q => q.OrderBy(s => s.Rank), string.Empty, true);
+            return recipe;
         }
 
-        public IEnumerable<RecipeEntity> GetAll()
+        public async Task<IList<Recipe>> GetAll()
         {
-            return _recipeRepository.GetAll();
+            return await _recipeRepository.GetAllAsync();
         }
 
-        public void Insert(RecipeEntity recipe)
+        public async Task<Guid> Add(Recipe recipe)
         {
-             _recipeRepository.Insert(recipe);
+             return await _recipeRepository.AddAsync(recipe);
         }
 
-        public void Update(RecipeEntity recipe)
+        public async Task Update(Recipe recipe)
         {
-            _recipeRepository.Update(recipe);
+            await _recipeRepository.UpdateAsync(recipe);
         }
     }
 }

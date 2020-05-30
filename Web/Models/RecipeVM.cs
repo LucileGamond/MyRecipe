@@ -1,5 +1,6 @@
-﻿using System;
-
+﻿using Data;
+using System;
+using System.Collections.Generic;
 
 namespace Web.Models
 {
@@ -14,5 +15,7 @@ namespace Web.Models
         public int WaitingDuration { get; set; }
         public int DifficultyLevel { get; set; }
         public string RecommendedAssociation { get; set; }
+
+        public ICollection<Step> Steps { get; set; }
     }
 }

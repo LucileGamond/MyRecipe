@@ -13,9 +13,8 @@ namespace Repository
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            new UserMap(modelBuilder.Entity<UserEntity>());
-            new UserProfileMap(modelBuilder.Entity<UserProfileEntity>());
-            new RecipeMap(modelBuilder.Entity<RecipeEntity>());
+            new RecipeMap(modelBuilder.Entity<Recipe>());
+            new StepMap(modelBuilder.Entity<Step>());
         }
     }
 }

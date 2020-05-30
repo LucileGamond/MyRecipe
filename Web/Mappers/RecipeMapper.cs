@@ -5,12 +5,24 @@ using Web.Models;
 
 namespace Web.Mappers
 {
-    public class RecipeMapper : IMapper<RecipeEntity, RecipeVM, RecipeListVM>
+    public class RecipeMapper : IMapper<Recipe, RecipeVM, RecipeListVM>
     {
 
-        public RecipeEntity ToModel(RecipeVM recipeVM)
+        public Recipe ToModel(RecipeVM recipeVM)
         {
-            RecipeEntity recipe = new RecipeEntity();
+            Recipe recipe = new Recipe();
+            recipe.Id = recipeVM.Id;
+            recipe.PrepDuration = recipeVM.PrepDuration;
+            recipe.CookingDuration = recipeVM.CookingDuration;
+            recipe.Title = recipeVM.Title;
+            recipe.PersCount = recipeVM.PersCount;
+            recipe.DifficultyLevel = recipeVM.DifficultyLevel;
+            recipe.Steps = recipeVM.Steps;
+            return recipe;
+        }
+        public Recipe ToModel(RecipeListVM recipeVM)
+        {
+            Recipe recipe = new Recipe();
             recipe.Id = recipeVM.Id;
             recipe.PrepDuration = recipeVM.PrepDuration;
             recipe.CookingDuration = recipeVM.CookingDuration;
@@ -19,20 +31,9 @@ namespace Web.Mappers
             recipe.DifficultyLevel = recipeVM.DifficultyLevel;
             return recipe;
         }
-        public RecipeEntity ToModel(RecipeListVM recipeVM)
+        public IList<Recipe> ToModel(IList<RecipeListVM> recipeVMs)
         {
-            RecipeEntity recipe = new RecipeEntity();
-            recipe.Id = recipeVM.Id;
-            recipe.PrepDuration = recipeVM.PrepDuration;
-            recipe.CookingDuration = recipeVM.CookingDuration;
-            recipe.Title = recipeVM.Title;
-            recipe.PersCount = recipeVM.PersCount;
-            recipe.DifficultyLevel = recipeVM.DifficultyLevel;
-            return recipe;
-        }
-        public List<RecipeEntity> ToModel(List<RecipeListVM> recipeVMs)
-        {
-            List<RecipeEntity> recipes = new List<RecipeEntity>();
+            List<Recipe> recipes = new List<Recipe>();
             foreach (RecipeListVM recipeVM in recipeVMs)
             {
                 recipes.Add(ToModel(recipeVM));
@@ -40,7 +41,7 @@ namespace Web.Mappers
             return recipes;
         }
 
-        public RecipeListVM ToListViewModel(RecipeEntity recipe)
+        public RecipeListVM ToListViewModel(Recipe recipe)
         {
             RecipeListVM recipeVM = new RecipeListVM();
             recipeVM.Id = recipe.Id;
@@ -52,17 +53,17 @@ namespace Web.Mappers
             return recipeVM;
         }
 
-        public List<RecipeListVM> ToListViewModel(List<RecipeEntity> recipes)
+        public IList<RecipeListVM> ToListViewModel(IList<Recipe> recipes)
         {
-            List<RecipeListVM> recipeVMs = new List<RecipeListVM>();
-            foreach (RecipeEntity recipe in recipes)
+            IList<RecipeListVM> recipeVMs = new List<RecipeListVM>();
+            foreach (Recipe recipe in recipes)
             {
                 recipeVMs.Add(ToListViewModel(recipe));
             }
             return recipeVMs;
         }
 
-        public RecipeVM ToViewModel(RecipeEntity recipe)
+        public RecipeVM ToViewModel(Recipe recipe)
         {
             RecipeVM recipeVM = new RecipeVM();
             recipeVM.Id = recipe.Id;
@@ -71,13 +72,14 @@ namespace Web.Mappers
             recipeVM.Title = recipe.Title;
             recipeVM.PersCount = recipe.PersCount;
             recipeVM.DifficultyLevel = recipe.DifficultyLevel;
+            recipeVM.Steps = recipe.Steps;
             return recipeVM;
         }
 
-        public List<RecipeVM> ToViewModel(List<RecipeEntity> recipes)
+        public IList<RecipeVM> ToViewModel(IList<Recipe> recipes)
         {
-            List<RecipeVM> recipeVMs = new List<RecipeVM>();
-            foreach (RecipeEntity recipe in recipes)
+            IList<RecipeVM> recipeVMs = new List<RecipeVM>();
+            foreach (Recipe recipe in recipes)
             {
                 recipeVMs.Add(ToViewModel(recipe));
             }
